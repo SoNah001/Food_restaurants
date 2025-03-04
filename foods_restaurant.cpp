@@ -110,12 +110,21 @@ void displayMenu() {
         cout << "\nMenu is empty!" << endl;
         return;
     }
-    cout << "\n------ Menu ------" << endl;
+
+    // จัดหัวตารางให้อ่านง่ายขึ้น
+    cout << "\n" << left << setw(5) << "No." 
+         << setw(20) << "Item Name" 
+         << setw(15) << "Allergy" 
+         << setw(10) << "Price ($)" << endl;
+    cout << string(50, '-') << endl; // เส้นคั่น
+
     int index = 1;
-    for (map<string, MenuItem>::const_iterator it = menu.begin(); it != menu.end(); ++it) {
-        cout << "[" << index++ << "] " << it->first 
-             << " - Allergy: " << it->second.allergy 
-             << " - $" << fixed << setprecision(2) << it->second.price << endl;
+    for (map<string, MenuItem>::iterator it = menu.begin(); it != menu.end(); ++it) {
+        cout << left << setw(5) << index++  // หมายเลขเมนู
+             << setw(20) << it->first       // ชื่อเมนู
+             << setw(15) << it->second.allergy // ข้อมูลแพ้อาหาร
+             << "$" << fixed << setprecision(2) << setw(8) << it->second.price // ราคา
+             << endl;
     }
     updateItemNumbers();
 }
